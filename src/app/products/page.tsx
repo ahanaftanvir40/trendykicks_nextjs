@@ -8,9 +8,9 @@ import Link from 'next/link';
 function page() {
     return (
         <div className='min-h-screen bg-black py-12 pt-36'>
-            <h1 className="text-lg md:text-7xl text-center font-sans font-bold mb-8 text-white">All Kicks ({productData.products.length}) </h1>
+            <h1 className="text-lg md:text-7xl text-center font-sans font-bold mb-2 sm:mb-8 text-white">All Kicks ({productData.products.length}) </h1>
 
-            <div className='flex flex-wrap justify-center gap-10 p-4 sm:p-0'>
+            <div className='flex flex-wrap justify-center sm:gap-10 px-4 sm:p-0'>
 
                 {productData.products.map((product) => (
                     <CardContainer key={product.id} className="inter-var">
