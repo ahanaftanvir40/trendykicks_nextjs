@@ -16,11 +16,10 @@ function NavBar({ className }: { className?: string }) {
 
                     </MenuItem>
                 </Link>
-                <MenuItem setActive={setActive} active={active} item="Brands">
+                <MenuItem setActive={setActive} active={active} item="Kicks">
                     <div className="flex flex-col space-y-4 text-sm">
-                        <HoveredLink href='/Products'>Nike</HoveredLink>
-                        <HoveredLink href='/Products'>Adidas</HoveredLink>
-                        <HoveredLink href='/Products'>Yeezy</HoveredLink>
+                        <HoveredLink href='/products'>All Products</HoveredLink>
+                        
                     </div>
 
                 </MenuItem>

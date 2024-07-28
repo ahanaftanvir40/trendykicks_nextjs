@@ -28,16 +28,16 @@
     },
     {
       "id": 3,
-      "name": "Adidas Ultraboost 22",
-      "brand": "Adidas",
-      "price": 180.00,
+      "name": "Nike SB Dunk Low Raygun",
+      "brand": "Nike",
+      "price": 150.00,
       "currency": "USD",
-      "stock": 15,
+      "stock": 25,
       "sizes": ["8", "9", "10", "11", "12"],
-      "colors": ["Black", "White"],
-      "image": "/shoes/adidas_ultraboost_22.png",
+      "colors": ["Black", "Orange", "White"],
+      "image": "/shoes/nike_sb_dunk_low_raygun.png",
       "isFeatured": true,
-      "description": "The Adidas Ultraboost 22 is designed for runners who demand both performance and style. With responsive Boost cushioning and a sleek design, this shoe comes in Black and White color options."
+      "description": "The Nike SB Dunk Low Raygun brings a bold and playful design inspired by the fictional Raygun basketball team. Featuring black, orange, and white colorways with tie-dye accents, these sneakers are a vibrant addition to any collection."
     },
     {
       "id": 4,
@@ -48,33 +48,33 @@
       "stock": 10,
       "sizes": ["8", "9", "10", "11"],
       "colors": ["White/Black", "Grey/Red"],
-      "image": "/shoes/nike_air_max_270_react.jpg",
+      "image": "/shoes/nike_air_max_270_react.png",
       "isFeatured": false,
       "description": "The Nike Air Max 270 React combines the latest Max Air cushioning with modern design. Available in White/Black and Grey/Red colorways, it's perfect for everyday wear."
     },
     {
       "id": 5,
-      "name": "Yeezy Slides",
-      "brand": "Yeezy",
-      "price": 70.00,
+      "name": "Nike Air Max 97",
+      "brand": "Nike",
+      "price": 170.00,
       "currency": "USD",
-      "stock": 20,
-      "sizes": ["6", "7", "8", "9"],
-      "colors": ["Bone", "Black"],
-      "image": "/shoes/yeezy_slides.jpg",
+      "stock": 30,
+      "sizes": ["6", "7", "8", "9", "10", "11"],
+      "colors": ["Silver Bullet", "Black", "Gold"],
+      "image": "/shoes/nike_air_max_97.png",
       "isFeatured": false,
-      "description": "Yeezy Slides offer a minimalist design with maximum comfort. Available in Bone and Black colors, these slides are perfect for casual wear and relaxation."
+      "description": "The Nike Air Max 97 features a sleek, futuristic design inspired by Japanese bullet trains. With its full-length visible Air unit and iconic Silver Bullet colorway, this sneaker offers a perfect blend of style and comfort for any occasion."
     },
     {
       "id": 6,
-      "name": "Adidas NMD_R1",
+      "name": "Adidas NMD R1",
       "brand": "Adidas",
       "price": 140.00,
       "currency": "USD",
       "stock": 18,
       "sizes": ["8", "9", "10", "11"],
       "colors": ["Core Black", "Footwear White"],
-      "image": "/shoes/adidas_nmd_r1.jpg",
+      "image": "/shoes/adidas_nmd_r1.png",
       "isFeatured": false,
       "description": "The Adidas NMD_R1 is a stylish sneaker that blends modern design with vintage elements. Featuring a Boost midsole and a flexible upper, it comes in Core Black and Footwear White."
     }
