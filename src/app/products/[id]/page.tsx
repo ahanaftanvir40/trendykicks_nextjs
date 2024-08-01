@@ -5,6 +5,7 @@ import { LampContainer } from '@/app/components/ui/lamp'
 import { motion } from "framer-motion";
 import productData from '@/app/data/shoe_collections.json'
 import Image from 'next/image';
+import Link from 'next/link';
 
 interface Product {
     id: number,
@@ -31,77 +32,76 @@ function Page() {
     }, [id])
 
     return (
-        <div className='min-h-screen bg-black flex items-center justify-center'>
-            <LampContainer className='h-full w-full flex flex-col items-center justify-center p-8'>
-                <motion.div
-                    initial={{ opacity: 0.5, y: 100 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    transition={{
-                        delay: 0.3,
-                        duration: 0.8,
-                        ease: "easeInOut",
-                    }}
-                >
-                    {product?.image ? (
+
+        <div className="w-full h-screen bg-black dark:bg-dot-white/[0.2] bg-dot-black/[0.2] flex items-center justify-center text-white">
+            <LampContainer className="">
+                <div className="grid md:grid-cols-1 gap-8 max-w-4xl mx-auto py-12 px-2 sm:px-4 lg:px-6">
+                    <div className="gap-4 flex justify-center items-center">
                         <Image
-                            src={product.image}
-                            height={400}
+                            src={product?.image!}
+                            alt="Sneaker Hero"
                             width={400}
-                            alt={product.name || "Product Image"}
+                            height={380}
+                            className="w-fit p-8  object-contain rounded-lg"
                         />
-                    ) : (
-                        <div className="h-64 w-64 bg-gray-300 flex items-center justify-center">
-                            <span className="text-white">No Image Available</span>
+                        {/* Uncomment and modify the following code if needed */}
+                        {/* <div className="grid grid-cols-3 gap-4">
+                <button className="border rounded-lg overflow-hidden transition-colors hover:border-primary">
+                  <img
+                    src="/placeholder.svg"
+                    alt="Sneaker Detail 1"
+                    width={150}
+                    height={150}
+                    className="w-full aspect-square object-cover"
+                  />
+                </button>
+                <button className="border rounded-lg overflow-hidden transition-colors hover:border-primary">
+                  <img
+                    src="/placeholder.svg"
+                    alt="Sneaker Detail 2"
+                    width={150}
+                    height={150}
+                    className="w-full aspect-square object-cover"
+                  />
+                </button>
+                <button className="border rounded-lg overflow-hidden transition-colors hover:border-primary">
+                  <img
+                    src="/placeholder.svg"
+                    alt="Sneaker Detail 3"
+                    width={150}
+                    height={150}
+                    className="w-full aspect-square object-cover"
+                  />
+                </button>
+              </div> */}
+                    </div>
+                    <div className="flex flex-col justify-center gap-6">
+                        <div>
+                            <h1 className="text-3xl font-bold">{product?.name}</h1>
+                            <p className="text-muted-foreground">By {product?.brand}</p>
                         </div>
-                    )}
-                </motion.div>
-                <motion.h1
-                    initial={{ opacity: 0.5, y: 100 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    transition={{
-                        delay: 0.3,
-                        duration: 0.8,
-                        ease: "easeInOut",
-                    }}
-                    className="bg-gradient-to-br from-slate-300 to-slate-500 py-4 bg-clip-text text-center text-4xl font-medium tracking-tight text-transparent md:text-7xl mt-8"
-                >
-                    {product?.name}
-                </motion.h1>
-                <motion.div
-                    initial={{ opacity: 0.5, y: 100 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    transition={{
-                        delay: 0.3,
-                        duration: 0.8,
-                        ease: "easeInOut",
-                    }}
-                >
-
-
-                    <p className="text-base md:text-lg text-white text-center mb-4 max-w-3xl mx-auto">{product?.description}</p>
-                    <div className="text-center text-white mt-4">
-                        <p className="text-2xl font-semibold">{product?.currency} {product?.price}$</p>
-                        <p className="text-lg">Stock: {product?.stock}</p>
-                        <div className="flex justify-center gap-2 mt-2">
-                            <p className="font-semibold">Colors:</p>
-                            <div className="flex gap-2">
-                                {product?.colors.map((color, index) => (
-                                    <span key={index} className="px-2  rounded-full">{color}</span>
-                                ))}
+                        <div className="grid gap-4">
+                            <p className="text-muted-foreground">
+                                {product?.description}
+                            </p>
+                            <div className="grid gap-2">
+                                {/* Size selection buttons can go here */}
                             </div>
-                        </div>
-                        <div className="flex justify-center gap-2 mt-2">
-                            <p className="font-semibold">Sizes:</p>
-                            <div className="flex gap-2">
-                                {product?.sizes.map((size, index) => (
-                                    <span key={index} className="px-2  text-center rounded-full">{size}</span>
-                                ))}
+                            <div className="flex items-center justify-between">
+                                <h2 className="text-3xl font-bold">${product?.price}</h2>
+                                <Link href={`/cart`}>
+                                    <button className="inline-flex h-12 animate-shimmer items-center justify-center rounded-md border border-slate-800 bg-[linear-gradient(110deg,#000103,45%,#1e2631,55%,#000103)] bg-[length:200%_100%] px-6 font-medium text-slate-400 transition-colors focus:outline-none focus:ring-2 focus:ring-slate-400 focus:ring-offset-2 focus:ring-offset-slate-50">
+                                        Add to Cart
+                                    </button>
+                                </Link>
                             </div>
                         </div>
                     </div>
-                </motion.div>
+                </div>
             </LampContainer>
         </div>
+
+
     )
 }
 
