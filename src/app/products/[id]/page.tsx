@@ -1,5 +1,5 @@
 'use client'
-import { useParams } from 'next/navigation'
+
 import React, { useEffect, useState } from 'react'
 import { motion } from "framer-motion";
 import productData from '@/app/data/shoe_collections.json'
@@ -7,6 +7,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { ShootingStars } from '@/app/components/ui/shooting-stars';
 import { StarsBackground } from '@/app/components/ui/stars-background';
+import axios from 'axios';
 
 interface Product {
     id: number,
@@ -22,15 +23,20 @@ interface Product {
     description: string
 }
 
-function Page() {
-    const { id } = useParams()
-    const productID = Number(id)
+function Page({params}:any) {
+    const paramID = params.id
     const [product, setProduct] = useState<Product | null>(null)
 
-    useEffect(() => {
-        const filteredProduct = productData.products.find((item: Product) => item.id === productID)
-        setProduct(filteredProduct || null)
-    }, [id])
+
+    useEffect(()=>{
+        const fetchProduct =async () => {
+            const response = await axios.post(`/api/product` , {paramID})
+            console.log(response.data.data);
+            setProduct(response.data.data)
+            
+        }
+        fetchProduct()
+    } , [paramID])
 
     return (
 
