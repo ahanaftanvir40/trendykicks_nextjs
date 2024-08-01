@@ -10,15 +10,18 @@ import Image from 'next/image';
 import { motion } from 'framer-motion'
 import { BackgroundBeams } from './ui/background-beams';
 
+
 function HeroSection() {
     return (
+
         <div
-            className="h-auto sm:h-screen w-full rounded-md flex flex-col items-center justify-center relative overflow-hidden mx-auto py-10 md:py-0">
+            className="h-auto sm:h-screen w-full dark:bg-dot-white/[0.2] bg-dot-black/[0.2] rounded-md flex flex-col items-center justify-center relative overflow-hidden mx-auto py-10 md:py-0">
             <Spotlight
                 className="-top-40 left-0 md:left-60 md:-top-20"
                 fill="white"
             />
-            <BackgroundBeams />
+            {/* <BackgroundBeams /> */}
+
             <div className="p-4 sm:mt-10 relative z-10 w-full text-center flex flex-col md:flex-row justify-center items-center space-y-6 md:space-y-0 md:space-x-10">
                 <motion.div
                     initial={{ y: 0 }}
@@ -33,6 +36,7 @@ function HeroSection() {
                 >
                     <Image height={400} className='-rotate-3' src={shoe1} alt='' />
                 </motion.div>
+
                 <div className='borde  md:w-1/2 sm:transform sm:translate-x-12'>
                     <h1 className="mt-20 md:mt-0 text-4xl md:text-7xl font-bold bg-clip-text text-transparent bg-gradient-to-b from-neutral-50 to-neutral-400">
                         Redefine Your Walk.
@@ -41,6 +45,7 @@ function HeroSection() {
                         Elevate your style with our premium footwear collection. Experience unmatched comfort and modern design with every step. Discover luxury in every pair.
                     </p>
                 </div>
+
                 <motion.div
                     initial={{ y: 0 }}
                     animate={{ y: [0, -12, 0] }}
@@ -68,6 +73,7 @@ function HeroSection() {
             </div>
 
         </div>
+
     )
 }
 

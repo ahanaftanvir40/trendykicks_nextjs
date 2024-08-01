@@ -34,7 +34,7 @@ const testimonials = [
 
 function TestimonialCards() {
     return (
-        <div className="h-[40rem] sm:h-screen  w-full dark:bg-black dark:bg-grid-white/[0.2] relative flex flex-col items-center justify-center overflow-hidden">
+        <div className="h-[40rem] sm:h-screen  w-full dark:bg-black relative flex flex-col items-center justify-center overflow-hidden">
   <div className="absolute top-16 sm:top-32 w-full flex flex-col items-center gap-1 justify-center z-10 px-4 sm:px-0">
     <h1 className="text-2xl sm:text-6xl text-black dark:text-white/80 font-bold text-center">
       Voices of the Sneaker Savvy
