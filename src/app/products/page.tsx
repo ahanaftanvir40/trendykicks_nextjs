@@ -20,7 +20,7 @@ interface Product{
     description: string
 }
 
-function page() {
+function ProductPage() {
     const [products , setProducts] = useState<Product[]>([])
 
     useEffect(()=>{
@@ -96,4 +96,4 @@ function page() {
     )
 }
 
-export default page
+export default ProductPage
