@@ -36,7 +36,7 @@ export const LampContainer = ({
         className
       )}
     >
-      <div className="relative flex    mt-44  flex-1 items-center justify-center z-0">
+      <div className="relative flex  sm:mt-44  flex-1 items-center justify-center z-0">
         <motion.div
           initial={{ opacity: 0.5, width: "15rem" }}
           whileInView={{ opacity: 1, width: "30rem" }}
@@ -64,7 +64,7 @@ export const LampContainer = ({
           style={{
             backgroundImage: `conic-gradient(var(--conic-position), var(--tw-gradient-stops))`,
           }}
-          className="absolute  left-1/2 h-56 w-[30rem] bg-gradient-conic from-transparent via-transparent to-cyan-500 [--conic-position:from_290deg_at_center_top]"
+          className="absolute left-1/2 h-56 w-[30rem] bg-gradient-conic from-transparent via-transparent to-cyan-500 [--conic-position:from_290deg_at_center_top]"
         >
           <div className="absolute w-40 h-full right-0 bg-slate-950 bottom-0 [mask-image:linear-gradient(to_left,white,transparent)]" />
           <div className="absolute w-full right-0 bg-slate-950 h-40 bottom-0 [mask-image:linear-gradient(to_top,white,transparent)]" />
@@ -95,7 +95,7 @@ export const LampContainer = ({
         <div className="absolute z-40 h-44 w-full -translate-y-[12.5rem] bg-slate-950 "></div>
       </div>
 
-      <div className="relative z-50 flex flex-col items-center px-5 -mt-32">
+      <div className="relative z-50 flex flex-col items-center px-5 mt-36 sm:-mt-32">
         {children}
       </div>
     </div>
