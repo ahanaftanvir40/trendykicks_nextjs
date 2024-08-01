@@ -1,11 +1,12 @@
 'use client'
 import { useParams } from 'next/navigation'
 import React, { useEffect, useState } from 'react'
-import { LampContainer } from '@/app/components/ui/lamp'
 import { motion } from "framer-motion";
 import productData from '@/app/data/shoe_collections.json'
 import Image from 'next/image';
 import Link from 'next/link';
+import { ShootingStars } from '@/app/components/ui/shooting-stars';
+import { StarsBackground } from '@/app/components/ui/stars-background';
 
 interface Product {
     id: number,
@@ -33,9 +34,9 @@ function Page() {
 
     return (
 
-        <div className="w-full h-screen bg-black dark:bg-dot-white/[0.2] bg-dot-black/[0.2] flex items-center justify-center text-white">
-            <LampContainer className="">
-                <div className="grid md:grid-cols-1 gap-8 max-w-4xl mx-auto py-12 px-2 sm:px-4 lg:px-6">
+        <div className="w-full h-screen bg-black  flex items-center justify-center text-white">
+            
+                <div className="grid md:grid-cols-1 gap-8 max-w-4xl sm:mt-20 mx-auto py-12 px-4 sm:px-4 lg:px-12">
                     <div className="gap-4 flex justify-center items-center">
                         <Image
                             src={product?.image!}
@@ -98,7 +99,9 @@ function Page() {
                         </div>
                     </div>
                 </div>
-            </LampContainer>
+                <ShootingStars />
+                <StarsBackground />
+          
         </div>
 
 
