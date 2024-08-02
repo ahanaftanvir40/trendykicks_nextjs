@@ -1,4 +1,5 @@
 import type { Config } from "tailwindcss";
+import daisyui from "daisyui"
 
 const defaultTheme = require("tailwindcss/defaultTheme");
 const svgToDataUri = require("mini-svg-data-uri");
@@ -55,7 +56,8 @@ const config: Config = {
   },
   plugins: [
     addVariablesForColors,
-    dottedbg
+    dottedbg,
+    daisyui,
   ],
 
 

@@ -19,18 +19,26 @@ function NavBar({ className }: { className?: string }) {
                 <MenuItem setActive={setActive} active={active} item="Kicks">
                     <div className="flex flex-col space-y-4 text-sm">
                         <HoveredLink href='/products'>All Products</HoveredLink>
-                        
+
                     </div>
 
                 </MenuItem>
                 <Link href='/contact'>
-                <MenuItem setActive={setActive} active={active} item="Contact Us">
-                </MenuItem>
+                    <MenuItem setActive={setActive} active={active} item="Contact Us">
+                    </MenuItem>
                 </Link>
-                <Link href='/adminpanel/dashboard'>
-                <MenuItem setActive={setActive} active={active} item="Admin Dashboard">
+
+                <MenuItem setActive={setActive} active={active} item="Admin Panel">
+                    <div className="flex flex-col space-y-4 text-sm">
+                        <HoveredLink href='/add'>Add Products</HoveredLink>
+                        <HoveredLink href='/adminpanel'>Manage Products</HoveredLink>
+                        <HoveredLink href='/orders'>Orders</HoveredLink>
+                        <HoveredLink href='/products'>Users</HoveredLink>
+
+                    </div>
+
                 </MenuItem>
-                </Link>
+
             </Menu>
 
         </div>
