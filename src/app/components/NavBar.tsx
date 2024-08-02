@@ -27,6 +27,10 @@ function NavBar({ className }: { className?: string }) {
                 <MenuItem setActive={setActive} active={active} item="Contact Us">
                 </MenuItem>
                 </Link>
+                <Link href='/adminpanel'>
+                <MenuItem setActive={setActive} active={active} item="Admin Dashboard">
+                </MenuItem>
+                </Link>
             </Menu>
 
         </div>
