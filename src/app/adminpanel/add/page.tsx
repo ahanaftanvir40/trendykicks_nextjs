@@ -66,7 +66,7 @@ function AddPage() {
           <p className="text-neutral-600 text-sm max-w-sm mt-2 dark:text-neutral-300">
 
 
-            Add new sneakers by filling out the form with details like name, brand, price, stock, sizes, colors, image URL, and description. Click submit to add the sneaker to our inventory.
+            Add new sneakers by filling out the form with details like name, brand, price, stock, sizes, colors, image URL, and description. Click Add Sneaker to add the sneaker to our inventory.
           </p>
 
           <form className="my-8" onSubmit={handleSubmit}>
