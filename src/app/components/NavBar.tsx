@@ -30,7 +30,7 @@ function NavBar({ className }: { className?: string }) {
 
                 <MenuItem setActive={setActive} active={active} item="Admin Panel">
                     <div className="flex flex-col space-y-4 text-sm">
-                        <HoveredLink href='/add'>Add Products</HoveredLink>
+                        <HoveredLink href='/adminpanel/add'>Add Products</HoveredLink>
                         <HoveredLink href='/adminpanel'>Manage Products</HoveredLink>
                         <HoveredLink href='/orders'>Orders</HoveredLink>
                         <HoveredLink href='/products'>Users</HoveredLink>
