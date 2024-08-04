@@ -23,6 +23,9 @@ function AddPage() {
     isFeatured: false,
     description: ''
   });
+
+ 
+
   const handleChange = (e: any) => {
     const { name, value, type, checked } = e.target;
     setProduct({
