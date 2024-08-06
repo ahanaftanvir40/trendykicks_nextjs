@@ -3,6 +3,7 @@ import bcrypt from 'bcryptjs'
 import UserModel from "@/models/User";
 import { connect } from "@/dbConfig/dbConfig";
 import { z } from 'zod'
+import { sendMail } from "@/app/utils/mailer";
 connect()
 
 
@@ -42,6 +43,8 @@ export async function POST(request: NextRequest) {
             password: hashedPass
         })
         await user.save()
+
+        await sendMail({email , emailType:"VERIFY" , userid: user._id})
 
         return NextResponse.json({ message: 'User Signed up Successfully', data: user })
 

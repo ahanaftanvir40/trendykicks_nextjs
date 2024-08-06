@@ -5,9 +5,9 @@ interface User extends Document {
     email: string,
     password: string,
     isAdmin: boolean,
-    isVerified:boolean,
-    verifytoken:string,
-    verifyexpiry: Date,
+    isVerified: boolean,
+    verifytoken: string,
+    verifyexpiry: Date | undefined,
     orders: Types.ObjectId
 }
 
@@ -28,22 +28,21 @@ const UserSchema: Schema<User> = new Schema({
         type: Boolean,
         default: false
     },
-    isVerified:{
-        type:Boolean,
-        default:false
+    isVerified: {
+        type: Boolean,
+        default: false
     },
-    verifytoken:{
-        type:String,
-        required:true
+    verifytoken: {
+        type: String,
     },
-    verifyexpiry:{
-        type:Date
+    verifyexpiry: {
+        type: Date
     },
 
 
     orders: {
-        type:Schema.Types.ObjectId,
-        ref:'orders'
+        type: Schema.Types.ObjectId,
+        ref: 'orders'
     }
 })
 
