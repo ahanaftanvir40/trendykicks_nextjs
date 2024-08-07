@@ -6,7 +6,9 @@ import { CardBody, CardContainer, CardItem } from "../components/ui/3d-card";
 import Link from 'next/link';
 import axios from 'axios';
 
-interface Product{
+
+
+interface Product {
     _id: string,
     name: string,
     brand: string,
@@ -20,18 +22,20 @@ interface Product{
     description: string
 }
 
-function ProductPage() {
-    const [products , setProducts] = useState<Product[]>([])
 
-    useEffect(()=>{
-        const fetchProducts =async () => {
+
+function ProductPage({tokenData}:any) {
+    const [products, setProducts] = useState<Product[]>([])
+
+    useEffect(() => {
+        const fetchProducts = async () => {
             const response = await axios.get(`/api/product/getproducts`)
             console.log(response.data.data);
             setProducts(response.data.data)
-            
+
         }
         fetchProducts()
-    } , [])
+    }, [])
 
     return (
         <div className='min-h-screen bg-black py-12 pt-36'>
