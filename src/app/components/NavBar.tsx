@@ -13,7 +13,7 @@ function NavBar({ className }: { className?: string }) {
 
 
     const { data: session, status } = useSession()
-    console.log("session: ", session?.user);
+    // console.log("session: ", session?.user);
 
 
     const [active, setActive] = useState<string | null>(null);
