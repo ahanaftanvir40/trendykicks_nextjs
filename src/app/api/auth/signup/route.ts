@@ -18,6 +18,8 @@ export async function POST(request: NextRequest) {
     try {
 
         const reqBody = await request.json()
+        console.log(reqBody);
+        
 
         const result = userSchema.safeParse(reqBody)
 
@@ -46,7 +48,7 @@ export async function POST(request: NextRequest) {
 
         await sendMail({email , emailType:"VERIFY" , userid: user._id})
 
-        return NextResponse.json({ message: 'User Signed up Successfully', data: user })
+        return NextResponse.json({ message: 'User Signed up Successfully', data: user  , success:true})
 
 
 

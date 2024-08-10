@@ -47,7 +47,7 @@ function page() {
             {verified && (
                 <div>
                     <h2 className='text-3xl'>Email Verified You Can Exit This Page and Login</h2>
-                    <Link href='/login'>
+                    <Link href='/signin'>
                         <button className='p-4 rounded-lg bg-orange-500'>Login</button>
                     </Link>
                 </div>
