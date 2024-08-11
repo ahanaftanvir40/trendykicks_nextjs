@@ -25,11 +25,12 @@ export async function middleware(request: NextRequest) {
         return NextResponse.redirect(new URL('/', request.url))
     }
     if (!token && (
-        url.pathname.startsWith('/adminpanel')
+        url.pathname.startsWith('/products/cart')
+
     )) {
         console.log('Token info:' , token);
         
-        return NextResponse.redirect(new URL('/', request.url))
+        return NextResponse.redirect(new URL('/signin', request.url))
     }
 
     return NextResponse.next()
@@ -43,6 +44,7 @@ export const config = {
         '/',
         '/signin',
         '/signup',
+        '/products/cart',
         '/verifyemail/:path*',
         '/adminpanel/:path*'
     ],

@@ -25,7 +25,7 @@ function page() {
     useEffect(() => {
         const verifyEmail = async () => {
             try {
-                await axios.post(`api/auth/verifyemail`, { token })
+                await axios.post(`/api/auth/verifyemail`, { token })
                 setVerified(true)
             } catch (error) {
                 setError(true)

@@ -24,7 +24,7 @@ function page() {
   const onLogin = async () => {
     try {
       setLoading(true)
-      const response  = await axios.post(`api/auth/signup` , {
+      const response  = await axios.post(`/api/auth/signup` , {
         username:user.username,
         email:user.email,
         password:user.password

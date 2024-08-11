@@ -3,6 +3,7 @@ import { Inter } from "next/font/google";
 import "./globals.css";
 import NavBar from "./components/NavBar";
 import AuthProvider from "@/context/AuthProvider";
+import { CartProvider } from "@/context/CartContext";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -20,13 +21,15 @@ export default function RootLayout({
   return (
     <html lang="en" className="dark">
       <AuthProvider>
-        <body className={inter.className}>
-          <div className="relative w-full flex justify-center items-center">
-            <NavBar />
-          </div>
+        <CartProvider>
+          <body className={inter.className}>
+            <div className="relative w-full flex justify-center items-center">
+              <NavBar />
+            </div>
 
-          {children}
-        </body>
+            {children}
+          </body>
+        </CartProvider>
       </AuthProvider>
     </html>
   );
