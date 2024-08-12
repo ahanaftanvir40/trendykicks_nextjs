@@ -28,8 +28,11 @@ interface Product {
 function Page({ params }: any) {
     const paramID = params.id
     const [product, setProduct] = useState<Product | null>(null)
+    const [selectedSize, setSelectedSize] = useState<string | null>(null)
+    const [selectedColor, setSelectedColor] = useState<string | null>(null)
+    const [quantity, setQuantity] = useState<number>(1);
     const router = useRouter()
-    const { addtoCart  , cart} = useCart()
+    const { addtoCart, cart } = useCart()
 
 
     useEffect(() => {
@@ -42,15 +45,16 @@ function Page({ params }: any) {
     }, [paramID])
 
     const handleCart = () => {
-        if (product) {
+        if (product && selectedSize && selectedColor && quantity > 0) {
             addtoCart({
+                id: paramID,
                 name: product.name,
                 brand: product.brand,
-                size: '8',
-                color: 'Red',
+                size: selectedSize,
+                color: selectedColor,
                 price: product.price,
-                currency:'USD',
-                quantity: 1,
+                currency: 'USD',
+                quantity: quantity,
                 image: product.image
             })
 
@@ -67,76 +71,117 @@ function Page({ params }: any) {
         console.log("CART UPDATED:", cart);
     }, [cart]);
 
+    const incrementQuantity = () => {
+        setQuantity(prevQuantity => prevQuantity + 1);
+    }
+
+    const decrementQuantity = () => {
+        setQuantity(prevQuantity => (prevQuantity > 1 ? prevQuantity - 1 : 1));
+    }
+
     return (
 
-        <div className="w-full h-screen bg-black  flex items-center justify-center text-white">
+        <div className="w-full min-h-screen bg-black flex items-center justify-center text-white overflow-x-hidden">
 
-            <div className="grid md:grid-cols-1 gap-8 max-w-4xl sm:mt-20 mx-auto py-12 px-4 sm:px-4 lg:px-12">
+            <div className="grid md:grid-cols-1 gap-8 max-w-4xl mt-20 mx-auto py-12 px-4 sm:px-4 lg:px-12 w-full">
                 <div className="gap-4 flex justify-center items-center">
                     <Image
                         src={product?.image!}
                         alt="Sneaker Hero"
                         width={400}
                         height={380}
-                        className="w-fit p-8  object-contain rounded-lg"
+                        className="w-full max-w-xs sm:max-w-sm md:max-w-xl p-4 sm:p-8 object-contain rounded-lg"
                     />
-                    {/* Uncomment and modify the following code if needed */}
-                    {/* <div className="grid grid-cols-3 gap-4">
-                <button className="border rounded-lg overflow-hidden transition-colors hover:border-primary">
-                  <img
-                    src="/placeholder.svg"
-                    alt="Sneaker Detail 1"
-                    width={150}
-                    height={150}
-                    className="w-full aspect-square object-cover"
-                  />
-                </button>
-                <button className="border rounded-lg overflow-hidden transition-colors hover:border-primary">
-                  <img
-                    src="/placeholder.svg"
-                    alt="Sneaker Detail 2"
-                    width={150}
-                    height={150}
-                    className="w-full aspect-square object-cover"
-                  />
-                </button>
-                <button className="border rounded-lg overflow-hidden transition-colors hover:border-primary">
-                  <img
-                    src="/placeholder.svg"
-                    alt="Sneaker Detail 3"
-                    width={150}
-                    height={150}
-                    className="w-full aspect-square object-cover"
-                  />
-                </button>
-              </div> */}
                 </div>
-                <div className="flex flex-col justify-center gap-6">
-                    <div>
-                        <h1 className="text-3xl font-bold">{product?.name}</h1>
-                        <p className="text-muted-foreground">By {product?.brand}</p>
+                <div className="flex flex-col justify-center gap-6 w-full">
+                    <div className='flex  justify-between'>
+                        <div>
+                            <h1 className="text-3xl font-bold">{product?.name}</h1>
+                            <p className="text-muted-foreground">By {product?.brand}</p>
+                        </div>
+                        <div className='mt-2 sm:mt-0'>
+                            <h2 className="text-3xl font-bold">${product?.price}</h2>
+                        </div>
                     </div>
                     <div className="grid gap-4">
-                        <p className="text-muted-foreground">
+                        <p className="text-muted-foreground font-light">
                             {product?.description}
                         </p>
-                        <div className="grid gap-2">
-                            {/* Size selection buttons can go here */}
+                        <div className="flex justify-between mt-4 flex-wrap">
+                            {/* Size selection */}
+                            <div className='z-50 sm:mb-4'>
+                                <h3 className="font-semibold">Sizes</h3>
+                                <div className="flex gap-2 mt-2">
+                                    {product?.sizes.map((size) => (
+                                        <button className="p-[3px] relative"
+                                            key={size}
+                                            onClick={() => setSelectedSize(size)}
+                                        >
+                                            <div className={`absolute inset-0 bg-gradient-to-r from-indigo-500 to-purple-500 rounded-lg`} />
+                                            <div className={`px-5 py-2 bg-black rounded-[6px] relative group transition duration-200 text-white ${selectedSize === size ? 'bg-gradient-to-r from-indigo-500 to-purple-500' : ''}`}>
+                                                {size}
+                                            </div>
+                                        </button>
+                                    ))}
+                                </div>
+                            </div>
+
+                            {/* Color selection */}
+                            <div className='z-50 mt-3 sm:mt-0 sm:mb-4'>
+                                <h3 className="font-semibold">Variants</h3>
+                                <div className="flex gap-2 mt-2">
+                                    {product?.colors.map((color) => (
+                                        <button className="p-[3px] relative"
+                                            key={color}
+                                            onClick={() => setSelectedColor(color)}
+                                        >
+                                            <div className={`absolute inset-0 bg-gradient-to-r from-indigo-500 to-purple-500 rounded-lg`} />
+                                            <div className={`px-4 py-2 bg-black rounded-[6px] relative group transition duration-200 text-white ${selectedColor === color ? 'bg-gradient-to-r from-indigo-500 to-purple-500' : ''}`}>
+                                                {color}
+                                            </div>
+                                        </button>
+                                    ))}
+                                </div>
+                            </div>
+
                         </div>
-                        <div className="flex items-center justify-between">
-                            <h2 className="text-3xl font-bold">${product?.price}</h2>
 
-                            <button onClick={handleCart} className="inline-flex z-50  h-12 animate-shimmer items-center justify-center rounded-md border border-slate-800 bg-[linear-gradient(110deg,#000103,45%,#1e2631,55%,#000103)] bg-[length:200%_100%] px-6 font-medium text-slate-400 transition-colors focus:outline-none focus:ring-2 focus:ring-slate-400 focus:ring-offset-2 focus:ring-offset-slate-50">
-                                Add to Cart
-                            </button>
+                        <div className='flex justify-between sm:flex-row  sm:justify-between'>
+                            <div className='z-50 flex flex-col items-start mt-3 sm:mt-0'>
+                                <h3 className="font-semibold">Quantity</h3>
+                                <div className="flex items-center gap-2 mt-2">
+                                    <button className="p-[3px] relative"
+                                        onClick={decrementQuantity}
+                                    >
+                                        <div className={`absolute inset-0 border-2 rounded-lg`} />
+                                        <div className={`px-3 py-1 bg-black rounded-[6px] relative group transition duration-200 text-white hover:bg-transparent text-lg`}>
+                                            -
+                                        </div>
+                                    </button>
+                                    <span className="px-4 py-2 border-purple-500 border-2 bg-black shadow-md shadow-purple-500">{quantity}</span>
+                                    <button className="p-[3px] relative"
+                                        onClick={incrementQuantity}
+                                    >
+                                        <div className={`absolute inset-0 border-2 rounded-lg`} />
+                                        <div className={`px-3 py-1 bg-black rounded-[6px] relative group transition duration-200 text-white hover:bg-transparent text-lg`}>
+                                            +
+                                        </div>
+                                    </button>
+                                </div>
+                            </div>
+                            <div className=' flex items-end'>
 
+
+                                <button onClick={handleCart} className="inline-flex z-50 h-12 animate-shimmer items-center justify-center rounded-md border border-slate-800 bg-[linear-gradient(110deg,#000103,45%,#1e2631,55%,#000103)] bg-[length:200%_100%] px-10 font-medium text-white/80 transition-colors focus:outline-none focus:ring-2 focus:ring-slate-400 focus:ring-offset-2 focus:ring-offset-slate-50">
+                                    Add to Cart
+                                </button>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
             <ShootingStars />
             <StarsBackground />
-
         </div>
 
 

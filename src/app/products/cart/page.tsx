@@ -54,7 +54,7 @@ function CartPage() {
 
             <form onSubmit={handleSubmit} className="grid gap-4">
                 {cart.map(item => (
-                    <div key={item.image} className="flex items-center gap-4">
+                    <div key={item.id} className="flex items-center gap-4">
                         <Image src={item.image} alt={item.name} width={100} height={100} className="object-cover" />
                         <div className="flex-1">
                             <h2 className="text-lg font-bold">{item.name}</h2>

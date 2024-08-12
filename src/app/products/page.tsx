@@ -24,7 +24,7 @@ interface Product {
 
 
 
-function ProductPage({tokenData}:any) {
+function ProductPage({ tokenData }: any) {
     const [products, setProducts] = useState<Product[]>([])
 
     useEffect(() => {
@@ -75,13 +75,21 @@ function ProductPage({tokenData}:any) {
                                     alt="thumbnail"
                                 />
                             </CardItem>
-                            <div className="flex justify-end mt-4 sm:mt-6">
+                            <div className="flex justify-between mt-4 sm:mt-6">
+                                <CardItem
+                                    translateZ={20}
+                                    translateX={-40}
+                                    as="button"
+                                    className="px-4 py-2 rounded-xl text-xl sm:text-2xl font-normal dark:text-white"
+                                >
+                                    ${product.price}
+                                </CardItem>
                                 <Link href={`/products/${product._id}`}>
                                     <CardItem
                                         translateZ={20}
                                         translateX={40}
                                         as="button"
-                                        className="px-3 py-2 sm:px-4 sm:py-2 rounded-xl bg-black dark:bg-white dark:text-black text-white text-xs sm:text-sm font-bold"
+                                        className="px-4 py-2 sm:px-4 sm:py-2 rounded-xl bg-black dark:bg-white dark:text-black text-white text-xs sm:text-sm font-bold"
                                     >
                                         Step In
                                     </CardItem>
