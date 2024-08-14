@@ -33,8 +33,8 @@ function NavBar({ className }: { className?: string }) {
                         <HoveredLink href='/products'>All Products</HoveredLink>
                     </div>
                 </MenuItem>
-                <Link href='/contact'>
-                    <MenuItem setActive={setActive} active={active} item="Contact Us" />
+                <Link href='/'>
+                    <MenuItem setActive={setActive} active={active} item="About Us" />
                 </Link>
                 {session && (
                     <Link href='/products/cart'>
@@ -42,7 +42,7 @@ function NavBar({ className }: { className?: string }) {
                     </Link>
                 )}
                 {session && (
-                    <MenuItem setActive={setActive} active={active} Signout={<SignOut/>}>
+                    <MenuItem setActive={setActive} active={active} Signout={<SignOut />}>
                     </MenuItem>
                 )}
 
