@@ -6,7 +6,9 @@ import { CardBody, CardContainer, CardItem } from "../components/ui/3d-card";
 import Link from 'next/link';
 import axios from 'axios';
 
-interface Product{
+
+
+interface Product {
     _id: string,
     name: string,
     brand: string,
@@ -20,22 +22,24 @@ interface Product{
     description: string
 }
 
-function ProductPage() {
-    const [products , setProducts] = useState<Product[]>([])
 
-    useEffect(()=>{
-        const fetchProducts =async () => {
+
+function ProductPage({ tokenData }: any) {
+    const [products, setProducts] = useState<Product[]>([])
+
+    useEffect(() => {
+        const fetchProducts = async () => {
             const response = await axios.get(`/api/product/getproducts`)
             console.log(response.data.data);
             setProducts(response.data.data)
-            
+
         }
         fetchProducts()
-    } , [])
+    }, [])
 
     return (
         <div className='min-h-screen bg-black py-12 pt-36'>
-            <h1 className="text-lg md:text-7xl text-center font-sans font-bold mb-2 sm:mb-8 text-white">All Kicks ({productData.products.length}) </h1>
+            <h1 className="text-lg md:text-7xl text-center font-sans font-bold mb-2 sm:mb-8 text-white">All Kicks ({products.length}) </h1>
 
             <div className='flex flex-wrap justify-center sm:gap-10 px-4 sm:p-0'>
 
@@ -71,13 +75,21 @@ function ProductPage() {
                                     alt="thumbnail"
                                 />
                             </CardItem>
-                            <div className="flex justify-end mt-4 sm:mt-6">
+                            <div className="flex justify-between mt-4 sm:mt-6">
+                                <CardItem
+                                    translateZ={20}
+                                    translateX={-40}
+                                    as="button"
+                                    className="px-4 py-2 rounded-xl text-xl sm:text-2xl font-normal dark:text-white"
+                                >
+                                    ${product.price}
+                                </CardItem>
                                 <Link href={`/products/${product._id}`}>
                                     <CardItem
                                         translateZ={20}
                                         translateX={40}
                                         as="button"
-                                        className="px-3 py-2 sm:px-4 sm:py-2 rounded-xl bg-black dark:bg-white dark:text-black text-white text-xs sm:text-sm font-bold"
+                                        className="px-4 py-2 sm:px-4 sm:py-2 rounded-xl bg-black dark:bg-white dark:text-black text-white text-xs sm:text-sm font-bold"
                                     >
                                         Step In
                                     </CardItem>
