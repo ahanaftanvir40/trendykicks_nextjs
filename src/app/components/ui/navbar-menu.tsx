@@ -18,6 +18,7 @@ export const MenuItem = ({
   active,
   item,
   Cart,
+  Signout,
   className,
   children,
 }: {
@@ -25,6 +26,7 @@ export const MenuItem = ({
   active: string | null;
   item?: string | undefined;
   Cart?: React.ReactNode,
+  Signout?:React.ReactNode,
   className?: string
   children?: React.ReactNode;
 }) => {
@@ -40,6 +42,7 @@ export const MenuItem = ({
       
         
         {Cart}
+        {Signout}
 
  
       {active !== null && (
