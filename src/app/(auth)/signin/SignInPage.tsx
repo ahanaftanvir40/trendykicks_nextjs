@@ -1,5 +1,4 @@
 'use client'
-import { useRouter } from 'next/navigation'
 import React, { useState } from 'react'
 import Link from 'next/link'
 import { signIn } from 'next-auth/react'
@@ -8,7 +7,7 @@ import { Input } from '@/app/components/ui/input'
 
 function SignInPage() {
 
-    const router = useRouter()
+    
 
     const [user, setUser] = useState({
         email: '',

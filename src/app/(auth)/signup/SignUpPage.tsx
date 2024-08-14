@@ -1,6 +1,5 @@
 'use client'
 import React, { useState } from 'react'
-import Link from 'next/link'
 import { Label } from '../../components/ui/label'
 import { Input } from '@/app/components/ui/input'
 import axios from 'axios'
@@ -19,7 +18,7 @@ function SignUpPage() {
     password: ''
   })
 
-  const [buttonDisabled, setButtonDisabled] = useState(false)
+ 
   const [loading, setLoading] = useState(false)
 
   const onLogin = async () => {
