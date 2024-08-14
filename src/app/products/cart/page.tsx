@@ -33,6 +33,7 @@ function CartPage() {
     const [product, setProduct] = useState([])
     const router = useRouter()
     const totalAmount = cart.reduce((total, item) => total + item.price * item.quantity, 0)
+    const withDelivery = totalAmount + 10
 
     useEffect(() => {
         if (status === 'unauthenticated') {
@@ -68,7 +69,7 @@ function CartPage() {
             const response = await axios.post('/api/product/order', {
                 customer: session && session.user._id,  // Ensure session.user._id exists
                 products: cart,
-                totalAmount,
+                totalAmount: withDelivery,
                 currency: 'USD',
                 shippingAddress
             });

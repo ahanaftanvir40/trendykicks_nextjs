@@ -3,7 +3,7 @@
 import axios from 'axios'
 import Link from 'next/link'
 import { useSearchParams } from 'next/navigation'
-import React, { useEffect, useState  , Suspense} from 'react'
+import React, { useEffect, useState, Suspense } from 'react'
 
 function VerifyEmail() {
 
@@ -87,9 +87,9 @@ function VerifyEmail() {
     )
 }
 
-export default function VerifyEmailWrapper(){
-    return(
-        <Suspense fallback={<div>Loading...</div>}>
+export default function VerifyEmailWrapper() {
+    return (
+        <Suspense fallback={<div className='text-white text-2xl mt-20 text-center'>Wait a few seconds...</div>}>
             <VerifyEmail />
         </Suspense>
     )
