@@ -5,6 +5,7 @@ import { cn } from "../utils/cn";
 import Link from "next/link";
 import { useSession } from "next-auth/react";
 import Cart from "./Cart";
+import SignOut from "./SignOutComponent";
 
 
 
@@ -39,6 +40,10 @@ function NavBar({ className }: { className?: string }) {
                     <Link href='/products/cart'>
                         <MenuItem setActive={setActive} active={active} Cart={<Cart />} />
                     </Link>
+                )}
+                {session && (
+                    <MenuItem setActive={setActive} active={active} Signout={<SignOut/>}>
+                    </MenuItem>
                 )}
 
                 {session && session.user.isAdmin && (

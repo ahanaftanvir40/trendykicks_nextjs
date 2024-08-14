@@ -14,7 +14,7 @@ function SignInPage() {
         password: ''
     })
 
-    const [buttonDisabled, setButtonDisabled] = useState(false)
+    
     const [loading, setLoading] = useState(false)
 
     const onLogin = async () => {
