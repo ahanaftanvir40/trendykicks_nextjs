@@ -18,18 +18,18 @@ function SignUpPage() {
     password: ''
   })
 
- 
+
   const [loading, setLoading] = useState(false)
 
   const onLogin = async () => {
     try {
       setLoading(true)
-      const response  = await axios.post(`/api/auth/signup` , {
-        username:user.username,
-        email:user.email,
-        password:user.password
+      const response = await axios.post(`/api/auth/signup`, {
+        username: user.username,
+        email: user.email,
+        password: user.password
       })
-      if(response.data.success){
+      if (response.data.success) {
         toast.success("Please Verify Your Email")
         router.push('/')  //change this to router.back()
       }
