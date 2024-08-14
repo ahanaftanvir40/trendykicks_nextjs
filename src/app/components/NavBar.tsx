@@ -34,7 +34,7 @@ function NavBar({ className }: { className?: string }) {
                     </div>
                 </MenuItem>
                 <Link href='/'>
-                    <MenuItem setActive={setActive} active={active} item="About Us" />
+                    <MenuItem setActive={setActive} active={active} item="About" />
                 </Link>
                 {session && (
                     <Link href='/products/cart'>
