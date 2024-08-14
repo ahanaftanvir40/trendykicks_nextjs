@@ -5,7 +5,7 @@ import Link from 'next/link'
 import { useSearchParams } from 'next/navigation'
 import React, { useEffect, useState } from 'react'
 
-function page() {
+function VerifyEmail() {
 
     const searchParam = useSearchParams()
 
@@ -87,4 +87,4 @@ function page() {
     )
 }
 
-export default page
+export default VerifyEmail
