@@ -26,6 +26,7 @@
     "nodemailer": "^6.9.14",
     "react": "^18",
     "react-dom": "^18",
+    "react-hot-toast": "^2.4.1",
     "simplex-noise": "^4.0.3",
     "tailwind-merge": "^2.4.0",
     "uuid": "^10.0.0",

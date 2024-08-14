@@ -17,21 +17,31 @@ export const MenuItem = ({
   setActive,
   active,
   item,
+  Cart,
+  className,
   children,
 }: {
   setActive: (item: string) => void;
   active: string | null;
-  item: string;
+  item?: string | undefined;
+  Cart?: React.ReactNode,
+  className?: string
   children?: React.ReactNode;
 }) => {
   return (
-    <div onMouseEnter={() => setActive(item)} className="relative ">
+    <div onMouseEnter={() => setActive(item!)} className="relative ">
       <motion.p
         transition={{ duration: 0.3 }}
         className="cursor-pointer text-black hover:opacity-[0.9] dark:text-white"
       >
         {item}
+
       </motion.p>
+      
+        
+        {Cart}
+
+ 
       {active !== null && (
         <motion.div
           initial={{ opacity: 0, scale: 0.85, y: 10 }}

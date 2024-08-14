@@ -4,6 +4,8 @@ import "./globals.css";
 import NavBar from "./components/NavBar";
 import AuthProvider from "@/context/AuthProvider";
 import { CartProvider } from "@/context/CartContext";
+import Cart from "./components/Cart";
+import { Toaster } from "react-hot-toast";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -26,8 +28,9 @@ export default function RootLayout({
             <div className="relative w-full flex justify-center items-center">
               <NavBar />
             </div>
-
+          
             {children}
+           <Toaster position="top-center" />
           </body>
         </CartProvider>
       </AuthProvider>

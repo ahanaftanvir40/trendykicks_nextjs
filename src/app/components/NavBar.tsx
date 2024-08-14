@@ -4,6 +4,8 @@ import { HoveredLink, Menu, MenuItem, ProductItem } from "./ui/navbar-menu";
 import { cn } from "../utils/cn";
 import Link from "next/link";
 import { useSession } from "next-auth/react";
+import Cart from "./Cart";
+
 
 
 
@@ -18,26 +20,27 @@ function NavBar({ className }: { className?: string }) {
 
     const [active, setActive] = useState<string | null>(null);
     return (
+
         <div className={cn("fixed top-10 inset-x-0 max-w-2xl mx-auto z-50", className)}>
 
             <Menu setActive={setActive}>
                 <Link href={"/"}>
-                    <MenuItem setActive={setActive} active={active} item="Home">
-
-                    </MenuItem>
+                    <MenuItem setActive={setActive} active={active} item="Home" />
                 </Link>
                 <MenuItem setActive={setActive} active={active} item="Kicks">
                     <div className="flex flex-col space-y-4 text-sm">
                         <HoveredLink href='/products'>All Products</HoveredLink>
-
-
                     </div>
-
                 </MenuItem>
                 <Link href='/contact'>
-                    <MenuItem setActive={setActive} active={active} item="Contact Us">
-                    </MenuItem>
+                    <MenuItem setActive={setActive} active={active} item="Contact Us" />
                 </Link>
+                {session && (
+                    <Link href='/products/cart'>
+                        <MenuItem setActive={setActive} active={active} Cart={<Cart />} />
+                    </Link>
+                )}
+
                 {session && session.user.isAdmin && (
                     <MenuItem setActive={setActive} active={active} item="Admin Panel">
                         <div className="flex flex-col space-y-4 text-sm">
@@ -45,19 +48,14 @@ function NavBar({ className }: { className?: string }) {
                             <HoveredLink href='/adminpanel'>Manage Products</HoveredLink>
                             <HoveredLink href='/orders'>Orders</HoveredLink>
                             <HoveredLink href='/products'>Users</HoveredLink>
-
                         </div>
-
                     </MenuItem>
                 )}
-
-
-
-
-
             </Menu>
 
         </div>
+
+
     )
 }
 

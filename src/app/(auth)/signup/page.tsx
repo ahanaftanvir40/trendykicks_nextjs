@@ -5,6 +5,7 @@ import { Label } from '../../components/ui/label'
 import { Input } from '@/app/components/ui/input'
 import axios from 'axios'
 import { useRouter } from 'next/navigation'
+import toast from 'react-hot-toast'
 
 
 
@@ -30,6 +31,7 @@ function page() {
         password:user.password
       })
       if(response.data.success){
+        toast.success("Please Verify Your Email")
         router.push('/')  //change this to router.back()
       }
 
