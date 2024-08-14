@@ -199,7 +199,7 @@ function CartPage() {
                                     <h3 className="text-2xl font-semibold text-gray-900 dark:text-white">People also bought</h3>
                                     <div className="grid grid-cols-3 gap-6 ">
                                         {featuredProducts.map((product: Product) => (
-                                            <Link href={`/products/${product._id}`}>
+                                            <Link key={product.name} href={`/products/${product._id}`}>
                                                 <div key={product.name} className="flex justify-center mt-6 h-3/4">
                                                     <BackgroundGradient className="rounded-[22px] max-w-sm w-full h-full p-4 sm:p-10 bg-white dark:bg-zinc-900 flex flex-col justify-between">
                                                         <div className='flex items-center justify-center mb-6'>
