@@ -76,6 +76,7 @@ function CartPage() {
             if (response.data.success) {
                 setOrderSuccess(true);
                 clearCart();  // Clear the cart after successful order
+                router.push('/products/orderconfirm')
 
             } else {
                 toast.error('Failed to place order. Please try again.');
