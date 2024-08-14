@@ -32,6 +32,11 @@ export async function middleware(request: NextRequest) {
         
         return NextResponse.redirect(new URL('/signin', request.url))
     }
+    if(!token && (
+        url.pathname.startsWith('/products/orderconfirm')
+    )){
+        return NextResponse.redirect(new URL('/' , request.url))
+    }
 
     return NextResponse.next()
 
@@ -45,6 +50,7 @@ export const config = {
         '/signin',
         '/signup',
         '/products/cart',
+        '/products/orderconfirm',
         '/verifyemail/:path*',
         '/adminpanel/:path*'
     ],
