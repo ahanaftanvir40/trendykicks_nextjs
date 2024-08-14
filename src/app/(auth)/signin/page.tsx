@@ -76,7 +76,7 @@ function SignInPage() {
                             />
                         </div>
                         <div className='mt-2'>
-                            <p className='text-white/60 text-sm font-extralight'>Don't have an account?<Link href='/signup'><span className='text-blue-600 ml-2 text-sm font-semibold'>Signup</span></Link></p> 
+                            <p className='text-white/60 text-sm font-extralight'>Don&apos;t have an account?<Link href='/signup'><span className='text-blue-600 ml-2 text-sm font-semibold'>Signup</span></Link></p> 
 
                         </div>
 

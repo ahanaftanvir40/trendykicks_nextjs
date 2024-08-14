@@ -54,7 +54,7 @@ function SignUpPage() {
             Sign Up
           </h2>
           <p className="text-neutral-600 text-sm max-w-sm mt-2 dark:text-neutral-300">
-            Step into a world of premium footwear designed to elevate your style. Whether you're here to score the latest Yeezy release or add a classic pair of Air Jordans to your collection, your journey starts here.
+            Step into a world of premium footwear designed to elevate your style. Whether you&apos;re here to score the latest Yeezy release or add a classic pair of Air Jordans to your collection, your journey starts here.
           </p>
 
           <div className="my-8">
