@@ -1,6 +1,5 @@
 'use client'
 import React, { useState } from 'react'
-import Link from 'next/link'
 import { Label } from '../../components/ui/label'
 import { Input } from '@/app/components/ui/input'
 import axios from 'axios'
@@ -19,18 +18,18 @@ function SignUpPage() {
     password: ''
   })
 
-  const [buttonDisabled, setButtonDisabled] = useState(false)
+
   const [loading, setLoading] = useState(false)
 
   const onLogin = async () => {
     try {
       setLoading(true)
-      const response  = await axios.post(`/api/auth/signup` , {
-        username:user.username,
-        email:user.email,
-        password:user.password
+      const response = await axios.post(`/api/auth/signup`, {
+        username: user.username,
+        email: user.email,
+        password: user.password
       })
-      if(response.data.success){
+      if (response.data.success) {
         toast.success("Please Verify Your Email")
         router.push('/')  //change this to router.back()
       }
@@ -55,7 +54,7 @@ function SignUpPage() {
             Sign Up
           </h2>
           <p className="text-neutral-600 text-sm max-w-sm mt-2 dark:text-neutral-300">
-            Step into a world of premium footwear designed to elevate your style. Whether you're here to score the latest Yeezy release or add a classic pair of Air Jordans to your collection, your journey starts here.
+            Step into a world of premium footwear designed to elevate your style. Whether you&apos;re here to score the latest Yeezy release or add a classic pair of Air Jordans to your collection, your journey starts here.
           </p>
 
           <div className="my-8">
