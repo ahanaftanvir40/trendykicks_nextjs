@@ -6,7 +6,7 @@ import { signIn } from 'next-auth/react'
 import { Label } from '../../components/ui/label'
 import { Input } from '@/app/components/ui/input'
 
-function page() {
+function SignInPage() {
 
     const router = useRouter()
 
@@ -98,4 +98,4 @@ function page() {
     )
 }
 
-export default page
+export default SignInPage

@@ -11,7 +11,7 @@ import toast from 'react-hot-toast'
 
 
 
-function page() {
+function SignUpPage() {
   const router = useRouter()
   const [user, setUser] = useState({
     username: '',
@@ -115,4 +115,4 @@ function page() {
   )
 }
 
-export default page
+export default SignUpPage
