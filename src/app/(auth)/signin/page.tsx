@@ -4,10 +4,12 @@ import Link from 'next/link'
 import { signIn } from 'next-auth/react'
 import { Label } from '../../components/ui/label'
 import { Input } from '@/app/components/ui/input'
+import toast from 'react-hot-toast'
+import { useRouter } from 'next/navigation'
 
 function SignInPage() {
 
-    
+    const router = useRouter()
 
     const [user, setUser] = useState({
         email: '',
@@ -20,17 +22,26 @@ function SignInPage() {
     const onLogin = async () => {
         try {
             setLoading(true)
-            await signIn('credentials', {
+            const result = await signIn('credentials', {
                 email: user.email,
                 password: user.password,
-                callbackUrl: '/'
+                redirect:false
+                
             })
 
+            if(result?.ok){
+               toast.success('Signed in successfully')
+               router.back()
 
+            }else{
+
+                toast.error('Please Verify Your Email')
+                                
+            }
 
         } catch (error: any) {
-            console.log('Login Failed', error.message);
 
+            toast.error('Login Failed', error.message);
 
         } finally {
             setLoading(false)
