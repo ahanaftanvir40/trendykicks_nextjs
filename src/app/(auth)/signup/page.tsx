@@ -31,7 +31,7 @@ function SignUpPage() {
       })
       if (response.data.success) {
         toast.success("Please Verify Your Email")
-        router.push('/')  //change this to router.back()
+        router.push('/signin')
       }
 
 

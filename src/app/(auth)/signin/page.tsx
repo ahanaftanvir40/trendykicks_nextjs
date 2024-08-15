@@ -31,11 +31,12 @@ function SignInPage() {
 
             if(result?.ok){
                toast.success('Signed in successfully')
-               router.back()
+               router.push('/')
 
             }else{
 
-                toast.error('Please Verify Your Email')
+                // toast.error('Please Verify Your Email')
+                toast.error(result?.error!)
                                 
             }
 
