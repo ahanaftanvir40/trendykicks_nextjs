@@ -16,7 +16,7 @@ function SignInPage() {
         password: ''
     })
 
-    
+
     const [loading, setLoading] = useState(false)
 
     const onLogin = async () => {
@@ -25,18 +25,19 @@ function SignInPage() {
             const result = await signIn('credentials', {
                 email: user.email,
                 password: user.password,
-                redirect:false
-                
+                redirect: false
+
             })
 
-            if(result?.ok){
-               toast.success('Signed in successfully')
-               router.back()
+            if (result?.ok) {
+                toast.success('Signed in successfully')
+                router.push('/')
 
-            }else{
+            } else {
 
-                toast.error('Please Verify Your Email')
-                                
+                // toast.error('Please Verify Your Email')
+                toast.error(result?.error!)
+
             }
 
         } catch (error: any) {
@@ -87,7 +88,7 @@ function SignInPage() {
                             />
                         </div>
                         <div className='mt-2'>
-                            <p className='text-white/60 text-sm font-extralight'>Don&apos;t have an account?<Link href='/signup'><span className='text-blue-600 ml-2 text-sm font-semibold'>Signup</span></Link></p> 
+                            <p className='text-white/60 text-sm font-extralight'>Don&apos;t have an account?<Link href='/signup'><span className='text-blue-600 ml-2 text-sm font-semibold'>Signup</span></Link></p>
 
                         </div>
 
