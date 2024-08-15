@@ -18,12 +18,15 @@ function SignUpPage() {
     password: ''
   })
 
+  const [error, setError] = useState([])
+
 
   const [loading, setLoading] = useState(false)
 
   const onLogin = async () => {
     try {
       setLoading(true)
+      setError([])
       const response = await axios.post(`/api/auth/signup`, {
         username: user.username,
         email: user.email,
@@ -33,7 +36,10 @@ function SignUpPage() {
         toast.success("Please Verify Your Email")
         router.push('/signin')
       }
+      if (response.data.error) {
+        setError(response.data?.error)
 
+      }
 
 
     } catch (error: any) {
@@ -45,6 +51,7 @@ function SignUpPage() {
     }
 
   }
+
 
   return (
     <div className='min-h-screen bg-black py-12 pt-36 flex items-center justify-center'>
@@ -96,6 +103,12 @@ function SignUpPage() {
                 required
               />
             </div>
+            {error.map((item: any) => (
+              <div key={item.message}>
+                <p className='text-red-600 text-sm mt-1'>{item.message}</p>
+              </div>
+            ))}
+
 
             <button
               className="bg-gradient-to-br mt-4 relative group/btn from-black dark:from-zinc-900 dark:to-zinc-900 to-neutral-600 block dark:bg-zinc-800 w-full text-white rounded-md h-10 font-medium shadow-[0px_1px_0px_0px_#ffffff40_inset,0px_-1px_0px_0px_#ffffff40_inset] dark:shadow-[0px_1px_0px_0px_var(--zinc-800)_inset,0px_-1px_0px_0px_var(--zinc-800)_inset]"

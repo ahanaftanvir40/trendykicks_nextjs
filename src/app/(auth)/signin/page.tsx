@@ -18,10 +18,12 @@ function SignInPage() {
 
 
     const [loading, setLoading] = useState(false)
+    const [error , setError] = useState('')
 
     const onLogin = async () => {
         try {
             setLoading(true)
+            setError('')
             const result = await signIn('credentials', {
                 email: user.email,
                 password: user.password,
@@ -36,7 +38,8 @@ function SignInPage() {
             } else {
 
                 // toast.error('Please Verify Your Email')
-                toast.error(result?.error!)
+                toast.error(result?.error!.replace('Error: ' , '')!)
+                setError(result?.error!.replace('Error: ' , '')!)
 
             }
 
@@ -74,6 +77,9 @@ function SignInPage() {
                                 onChange={(e) => setUser({ ...user, email: e.target.value })}
                                 required
                             />
+                        </div>
+                        <div>
+                            <h1 className='text-red-600 text-sm'>{error? `${error}` : ''}</h1>
                         </div>
 
                         <div>
