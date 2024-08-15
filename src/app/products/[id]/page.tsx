@@ -11,6 +11,7 @@ import axios from 'axios';
 import { useRouter } from 'next/navigation';
 import { useCart } from '@/context/CartContext';
 import toast from 'react-hot-toast';
+import { useSession } from 'next-auth/react';
 
 interface Product {
     id: number,
@@ -28,6 +29,7 @@ interface Product {
 
 function Page({ params }: any) {
     const paramID = params.id
+    const {data: session , status} = useSession()
     const [product, setProduct] = useState<Product | null>(null)
     const [selectedSize, setSelectedSize] = useState<string | null>(null)
     const [selectedColor, setSelectedColor] = useState<string | null>(null)
@@ -70,8 +72,11 @@ function Page({ params }: any) {
             toast.error('Please select a Variant');
             return;
         }
+        if(!session){
+            router.push('/signin')
+        }
 
-        if (product && selectedSize && selectedColor && quantity > 0) {
+        if (session && product && selectedSize && selectedColor && quantity > 0) {
             addtoCart({
                 id: paramID,
                 name: product.name,
