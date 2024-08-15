@@ -90,7 +90,7 @@ function Page({ params }: any) {
             });
 
             // Log the cart state after updating it
-            console.log("CART SHOE AFTER ADDING:", cart);
+            // console.log("CART SHOE AFTER ADDING:", cart);
 
             // Redirect to cart page after adding the product
             router.push('/products/cart');
@@ -101,9 +101,9 @@ function Page({ params }: any) {
 
 
     // Log the cart state whenever it changes
-    useEffect(() => {
-        console.log("CART UPDATED:", cart);
-    }, [cart]);
+    // useEffect(() => {
+    //     console.log("CART UPDATED:", cart);
+    // }, [cart]);
 
     const incrementQuantity = () => {
         setQuantity(prevQuantity => prevQuantity + 1);
