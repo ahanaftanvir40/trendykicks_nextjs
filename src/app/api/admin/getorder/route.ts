@@ -2,10 +2,10 @@ import { NextRequest, NextResponse } from "next/server";
 import OrderModel from "@/models/Order";
 import UserModel from "@/models/User";
 import { connect } from "@/dbConfig/dbConfig";
-
+connect()
 
 export async function GET(request: NextRequest) {
-    await connect()
+    
     try {
 
 
