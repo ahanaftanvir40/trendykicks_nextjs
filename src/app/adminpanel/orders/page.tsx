@@ -9,13 +9,14 @@ import Image from 'next/image'
 
 
 function OrderPage() {
+  const {signal} = new AbortController()
 
   const [pendingOrder, setPendingOrder] = useState<any[]>([])
   const [deliveredOrder, setDeliveredOrder] = useState<any[]>([])
 
   useEffect(() => {
     const fetchOrders = async () => {
-      const response = await axios.get('/api/admin/getorder')
+      const response = await axios.get('/api/admin/getorder' , {signal})
       console.log("Pending Orders:", response.data.Pending);
       setPendingOrder(response.data.Pending)
 
@@ -25,7 +26,7 @@ function OrderPage() {
 
   useEffect(() => {
     const DeliveredOrders = async () => {
-      const response = await axios.get('/api/admin/getorder/delivered' )
+      const response = await axios.get('/api/admin/getorder/delivered' , {signal} )
       console.log("Delivered Orders:", response.data.Delivered)
       setDeliveredOrder(response.data.Delivered)
     }
@@ -36,10 +37,10 @@ function OrderPage() {
     const response = await axios.post('/api/admin/status', { OrderId, NewStatus })
 
     if (response.data.success) {
-      const response = await axios.get('/api/admin/getorder' )
+      const response = await axios.get('/api/admin/getorder' ,{signal} )
       setPendingOrder(response.data.Pending)
 
-      const deliveredResponse = await axios.get('/api/admin/getorder/delivered' )
+      const deliveredResponse = await axios.get('/api/admin/getorder/delivered' ,{signal})
       setDeliveredOrder(deliveredResponse.data.Delivered)
       toast.success('Status Updated')
 
