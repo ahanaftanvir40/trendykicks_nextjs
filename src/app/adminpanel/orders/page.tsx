@@ -83,7 +83,7 @@ function OrderPage() {
               </thead>
               <tbody>
                 {/* row 1 */}
-                {pendingOrder.map((item: any) => (
+                {pendingOrder && pendingOrder.map((item: any) => (
                   <tr key={item.orderDate}>
                     <th>
                       <label>
