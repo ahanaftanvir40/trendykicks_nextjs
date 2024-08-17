@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import { connect } from "@/dbConfig/dbConfig";
 import OrderModel from "@/models/Order";
+import UserModel from "@/models/User";
 connect()
 
 export async function POST(request: NextRequest) {
@@ -17,9 +18,11 @@ export async function POST(request: NextRequest) {
             shippingAddress
         })
 
-       const savedOrder =  await newOrder.save()
 
-       return NextResponse.json({success:true , message:'Order Placed' , savedOrder})
+        const savedOrder = await newOrder.save()
+        await UserModel.findByIdAndUpdate(customer, { orders: savedOrder._id })
+
+        return NextResponse.json({ success: true, message: 'Order Placed', savedOrder })
 
 
 

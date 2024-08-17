@@ -51,7 +51,7 @@ function NavBar({ className }: { className?: string }) {
                         <div className="flex flex-col space-y-4 text-sm">
                             <HoveredLink href='/adminpanel/add'>Add Products</HoveredLink>
                             <HoveredLink href='/adminpanel'>Manage Products</HoveredLink>
-                            <HoveredLink href='/orders'>Orders</HoveredLink>
+                            <HoveredLink href='/adminpanel/orders'>Orders</HoveredLink>
                             <HoveredLink href='/products'>Users</HoveredLink>
                         </div>
                     </MenuItem>

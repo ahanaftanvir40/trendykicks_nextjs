@@ -1,14 +1,14 @@
 import mongoose, { Schema, Document, Types } from "mongoose";
 
 interface User extends Document {
-    username: string,
-    email: string,
-    password: string,
-    isAdmin: boolean,
-    isVerified: boolean,
-    verifytoken: string,
-    verifyexpiry: Date | undefined,
-    orders: Types.ObjectId
+    username: string;
+    email: string;
+    password: string;
+    isAdmin: boolean;
+    isVerified: boolean;
+    verifytoken: string;
+    verifyexpiry: Date | undefined;
+    orders: Types.ObjectId[];
 }
 
 const UserSchema: Schema<User> = new Schema({
@@ -40,13 +40,13 @@ const UserSchema: Schema<User> = new Schema({
     },
 
 
-    orders: {
+    orders: [{
         type: Schema.Types.ObjectId,
         ref: 'orders'
-    }
+    }]
 })
 
 
-const UserModel = mongoose.models.users as mongoose.Model<User> || mongoose.model('users', UserSchema)
+const UserModel = mongoose.models.users || mongoose.model('users', UserSchema)
 
 export default UserModel
