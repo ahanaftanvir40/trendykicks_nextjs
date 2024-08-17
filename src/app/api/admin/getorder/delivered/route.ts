@@ -4,15 +4,22 @@ import OrderModel from "@/models/Order";
 connect()
 
 export async function GET(request: NextRequest) {
-    const headers = new Headers();
-    headers.set('Cache-Control', 'no-store');
+
 
     try {
         const DeliveredOrders = await OrderModel.find({ status: 'Delivered' }).populate('customer')
 
-        return NextResponse.json({ message: 'Getting Delivered Products', Delivered: DeliveredOrders, success: true })
+        const response = NextResponse.json({ message: 'Getting Delivered Products', Delivered: DeliveredOrders, success: true })
+        response.headers.set('Cache-Control', 'no-store');
+
+        return response
 
     } catch (error) {
-        return NextResponse.json({ message: 'Failed To get delivered orders' })
+        const response = NextResponse.json({ message: 'Failed To get delivered orders' });
+
+        // Set Cache-Control header to no-store for error response as well
+        response.headers.set('Cache-Control', 'no-store');
+
+        return response;
     }
 }

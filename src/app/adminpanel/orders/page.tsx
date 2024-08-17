@@ -25,7 +25,7 @@ function OrderPage() {
 
   useEffect(() => {
     const DeliveredOrders = async () => {
-      const response = await axios.get('/api/admin/getorder/delivered')
+      const response = await axios.get('/api/admin/getorder/delivered' , { headers: { 'Cache-Control': 'no-cache' } })
       console.log("Delivered Orders:", response.data.Delivered)
       setDeliveredOrder(response.data.Delivered)
     }
@@ -36,10 +36,10 @@ function OrderPage() {
     const response = await axios.post('/api/admin/status', { OrderId, NewStatus })
 
     if (response.data.success) {
-      const response = await axios.get('/api/admin/getorder')
+      const response = await axios.get('/api/admin/getorder' , { headers: { 'Cache-Control': 'no-cache' } })
       setPendingOrder(response.data.Pending)
 
-      const deliveredResponse = await axios.get('/api/admin/getorder/delivered')
+      const deliveredResponse = await axios.get('/api/admin/getorder/delivered' , { headers: { 'Cache-Control': 'no-cache' } })
       setDeliveredOrder(deliveredResponse.data.Delivered)
       toast.success('Status Updated')
 

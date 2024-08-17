@@ -14,10 +14,18 @@ export async function GET(request: NextRequest) {
         const PendingOrders = await OrderModel.find({ status: 'Pending' }).populate('customer')
         console.log('Order error: ', PendingOrders);
 
-        return NextResponse.json({ message: 'Getting Orders', Pending: PendingOrders })
+        const response = NextResponse.json({ message: 'Getting Orders', Pending: PendingOrders })
+        response.headers.set('Cache-Control', 'no-store');
+
+        return response
 
 
     } catch (error: any) {
-        return NextResponse.json({ message: error.message })
+        const response = NextResponse.json({ message: 'Failed To get delivered orders' });
+
+        // Set Cache-Control header to no-store for error response as well
+        response.headers.set('Cache-Control', 'no-store');
+
+        return response;
     }
 }
