@@ -3,6 +3,7 @@ import mongoose, { Schema, Document, Types, model } from "mongoose";
 
 
 
+
 interface Product {
     name: string;
     brand: string;
