@@ -16,6 +16,7 @@ function OrderPage() {
   useEffect(() => {
     const fetchOrders = async () => {
       const response = await axios.get('/api/admin/getorder')
+      console.log("Pending Orders:", response.data.Pending);
       setPendingOrder(response.data.Pending)
 
     }
@@ -25,6 +26,7 @@ function OrderPage() {
   useEffect(() => {
     const DeliveredOrders = async () => {
       const response = await axios.get('/api/admin/getorder/delivered')
+      console.log("Delivered Orders:", response.data.Delivered)
       setDeliveredOrder(response.data.Delivered)
     }
     DeliveredOrders()
