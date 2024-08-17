@@ -25,7 +25,7 @@ function OrderPage() {
 
   useEffect(() => {
     const DeliveredOrders = async () => {
-      const response = await axios.get('/api/admin/getorder/delivered' , { headers: { 'Cache-Control': 'no-cache' } })
+      const response = await axios.get('/api/admin/getorder/delivered' )
       console.log("Delivered Orders:", response.data.Delivered)
       setDeliveredOrder(response.data.Delivered)
     }
@@ -36,10 +36,10 @@ function OrderPage() {
     const response = await axios.post('/api/admin/status', { OrderId, NewStatus })
 
     if (response.data.success) {
-      const response = await axios.get('/api/admin/getorder' , { headers: { 'Cache-Control': 'no-cache' } })
+      const response = await axios.get('/api/admin/getorder' )
       setPendingOrder(response.data.Pending)
 
-      const deliveredResponse = await axios.get('/api/admin/getorder/delivered' , { headers: { 'Cache-Control': 'no-cache' } })
+      const deliveredResponse = await axios.get('/api/admin/getorder/delivered' )
       setDeliveredOrder(deliveredResponse.data.Delivered)
       toast.success('Status Updated')
 
@@ -84,7 +84,7 @@ function OrderPage() {
               <tbody>
                 {/* row 1 */}
                 {pendingOrder.map((item: any) => (
-                  <tr key={item._id}>
+                  <tr key={item.orderDate}>
                     <th>
                       <label>
                         <input type="checkbox" className="checkbox" />
@@ -106,7 +106,7 @@ function OrderPage() {
                       </div>
                     </td>
                     {item.products.map((product: any) => (
-                      <td className='text-lg' key={product._id}>
+                      <td className='text-lg' key={product.name}>
                         {product.name}
                         <br />
                         <span className="badge badge-ghost badge-lg">Size: {product.size} Variant: {product.color}</span>
