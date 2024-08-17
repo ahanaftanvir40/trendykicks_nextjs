@@ -82,7 +82,7 @@ function OrderPage() {
             <tbody>
               {/* row 1 */}
               {pendingOrder.map((item: any) => (
-                <tr>
+                <tr key={item._id}>
                   <th>
                     <label>
                       <input type="checkbox" className="checkbox" />
@@ -160,7 +160,7 @@ function OrderPage() {
           <tbody>
             {/* row 1 */}
             {deliveredOrder.map((item: any) => (
-              <tr>
+              <tr key={item._id}>
                 <th>
                   <label>
                     <input type="checkbox" className="checkbox" />
