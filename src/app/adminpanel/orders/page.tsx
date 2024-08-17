@@ -16,9 +16,20 @@ function OrderPage() {
 
   useEffect(() => {
     const fetchOrders = async () => {
-      const response = await axios.get('/api/admin/getorder' , {signal})
-      console.log("Pending Orders:", response.data.Pending);
-      setPendingOrder(response.data.Pending)
+      const response = await fetch('/api/admin/getorder', {
+        signal,
+        headers: {
+          'Cache-Control': 'no-store'
+        }
+      });
+
+      if (!response.ok) {
+        throw new Error('Network response was not ok');
+      }
+
+      const data = await response.json();
+      console.log("Pending Orders:", data.Pending);
+      setPendingOrder(data.Pending)
 
     }
     fetchOrders()
@@ -26,9 +37,21 @@ function OrderPage() {
 
   useEffect(() => {
     const DeliveredOrders = async () => {
-      const response = await axios.get('/api/admin/getorder/delivered' , {signal} )
-      console.log("Delivered Orders:", response.data.Delivered)
-      setDeliveredOrder(response.data.Delivered)
+      const response = await fetch('/api/admin/getorder/delivered', {
+        signal,
+        headers: {
+          'Cache-Control': 'no-store'
+        }
+      });
+
+      if (!response.ok) {
+        throw new Error('Network response was not ok');
+      }
+
+      const data = await response.json();
+      console.log('Pending Orders:', data.Pending);
+      console.log("Delivered Orders:", data.Delivered)
+      setDeliveredOrder(data.Delivered)
     }
     DeliveredOrders()
   }, [])
