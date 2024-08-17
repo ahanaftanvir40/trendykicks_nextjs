@@ -104,7 +104,7 @@ function OrderPage() {
                     </div>
                   </td>
                   {item.products.map((product: any) => (
-                    <td className='text-lg'>
+                    <td className='text-lg' key={product._id}>
                       {product.name}
                       <br />
                       <span className="badge badge-ghost badge-lg">Size: {product.size} Variant: {product.color}</span>
@@ -182,7 +182,7 @@ function OrderPage() {
                   </div>
                 </td>
                 {item.products.map((product: any) => (
-                  <td className='text-xl'>
+                  <td className='text-xl' key={product._id}>
                     {product.name}
                     <br />
                     <span className="badge badge-ghost badge-lg">Size: {product.size} Variant: {product.color}</span>
