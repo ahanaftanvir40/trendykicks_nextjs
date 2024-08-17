@@ -51,7 +51,7 @@ function OrderPage() {
 
   return (
     <div className='min-h-screen bg-black py-12 pt-36 text-white'>
-      {pendingOrder.length === 0 ? (
+      {pendingOrder && pendingOrder.length === 0 ? (
         <div className='flex justify-center items-center mt-20'>
           <h1 className='text-white/80 text-4xl'>There is no pending orders.</h1>
         </div>
@@ -161,7 +161,7 @@ function OrderPage() {
           </thead>
           <tbody>
             {/* row 1 */}
-            {deliveredOrder.map((item: any) => (
+            {deliveredOrder && deliveredOrder.map((item: any) => (
               <tr key={item._id}>
                 <th>
                   <label>
