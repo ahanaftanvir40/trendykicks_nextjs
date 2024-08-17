@@ -5,17 +5,19 @@ import { connect } from "@/dbConfig/dbConfig";
 connect()
 
 export async function GET(request: NextRequest) {
-    
+    const headers = new Headers();
+    headers.set('Cache-Control', 'no-store');
+
     try {
 
 
         const PendingOrders = await OrderModel.find({ status: 'Pending' }).populate('customer')
-        console.log('Order error: ' , PendingOrders);
-        
-        return NextResponse.json({ message: 'Getting Orders', Pending: PendingOrders  })
+        console.log('Order error: ', PendingOrders);
+
+        return NextResponse.json({ message: 'Getting Orders', Pending: PendingOrders })
 
 
-    } catch (error:any) {
+    } catch (error: any) {
         return NextResponse.json({ message: error.message })
     }
 }
