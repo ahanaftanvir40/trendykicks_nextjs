@@ -122,11 +122,11 @@ function OrderPage() {
                       </div>
                     </td>
                     {item.products.map((product: any) => (
-                      <td className='text-lg' key={product._id}>
+                      <tr className='text-xl border-none' key={product._id}>
                         {product.name}
                         <br />
-                        <span className="badge badge-ghost badge-lg">Size: {product.size} Variant: {product.color}</span>
-                      </td>
+                        <span className="badge badge-ghost badge-lg mb-3">Size: {product.size} Variant: {product.color}</span>
+                      </tr>
                     ))}
 
                     <td >{item.shippingAddress}</td>
@@ -199,11 +199,11 @@ function OrderPage() {
                   </div>
                 </td>
                 {item.products.map((product: any) => (
-                  <td className='text-xl' key={product._id}>
+                  <tr className='text-xl border-none' key={product._id}>
                     {product.name}
                     <br />
-                    <span className="badge badge-ghost badge-lg">Size: {product.size} Variant: {product.color}</span>
-                  </td>
+                    <span className="badge badge-ghost badge-lg mb-3">Size: {product.size} Variant: {product.color}</span>
+                  </tr>
                 ))}
 
 
