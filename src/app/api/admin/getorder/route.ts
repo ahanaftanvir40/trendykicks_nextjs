@@ -4,7 +4,7 @@ import UserModel from "@/models/User";
 import { connect } from "@/dbConfig/dbConfig";
 
 
-export async function GET(request: NextRequest) {
+export async function POST(request: NextRequest) {
     await connect()
     try {
 

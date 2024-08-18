@@ -17,7 +17,7 @@ function OrderPage() {
 
   const fetchOrders = async () => {
    try {
-     const response = await axios('/api/admin/getorder')
+     const response = await axios.post('/api/admin/getorder')
      console.log("Pending Orders:", response.data.Pending);
      setPendingOrder(response.data.Pending)
    } catch (error) {
