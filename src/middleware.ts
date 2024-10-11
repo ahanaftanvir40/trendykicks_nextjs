@@ -6,7 +6,7 @@ import { getToken } from "next-auth/jwt"
 // This function can be marked `async` if using `await` inside
 export async function middleware(request: NextRequest) {
 
-    const token = await getToken({ req: request , secret:process.env.NEXT_AUTH })
+    const token = await getToken({ req: request, secret: process.env.NEXT_AUTH })
     console.log('token log middleware :', token);
 
     const url = request.nextUrl
@@ -19,23 +19,27 @@ export async function middleware(request: NextRequest) {
         return NextResponse.redirect(new URL('/', request.url))
     }
 
-    if (token?.isAdmin === false && (
-        url.pathname.startsWith('/adminpanel')
-    )) {
+    if (!token && url.pathname.startsWith('/adminpanel')) {
+        return NextResponse.redirect(new URL('/signin', request.url))
+    }
+
+    // Move this block after the new check
+    if (token && token.isAdmin === false && url.pathname.startsWith('/adminpanel')) {
         return NextResponse.redirect(new URL('/', request.url))
     }
+    
     if (!token && (
         url.pathname.startsWith('/products/cart')
 
     )) {
-        console.log('Token info:' , token);
-        
+        console.log('Token info:', token);
+
         return NextResponse.redirect(new URL('/signin', request.url))
     }
-    if(!token && (
+    if (!token && (
         url.pathname.startsWith('/products/orderconfirm')
-    )){
-        return NextResponse.redirect(new URL('/' , request.url))
+    )) {
+        return NextResponse.redirect(new URL('/', request.url))
     }
 
     return NextResponse.next()
@@ -52,6 +56,7 @@ export const config = {
         '/products/cart',
         '/products/orderconfirm',
         '/verifyemail/:path*',
+        '/adminpanel',
         '/adminpanel/:path*'
     ],
 }
