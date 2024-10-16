@@ -10,6 +10,8 @@ import Link from 'next/link';
 import { BackgroundGradient } from '@/app/components/ui/background-gradient';
 import { Input } from '@/app/components/ui/input';
 import toast from 'react-hot-toast';
+import { loadStripe } from '@stripe/stripe-js';
+
 
 interface Product {
     _id: string,
@@ -95,6 +97,30 @@ function CartPage() {
         }
         else if (paymentMethod === 'online') {
             toast.success('Stripe payment will be implemented here.');
+
+            try {
+                const response = await axios.post('/api/stripe/create-checkout-session', {
+                    items: cart,
+                    shippingAddress
+                })
+
+                const stripe = await loadStripe(process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY!)
+
+                if (stripe) {
+                    const result = await stripe.redirectToCheckout({
+                        sessionId: response.data.sessionId
+                    })
+
+                    if (result.error) {
+                        toast.error(result.error.message!)
+                    }
+                } else {
+                    toast.error('Stripe not found')
+                }
+            } catch (error) {
+                console.error('Error creating Stripe session:', error);
+                toast.error('Failed to process payment. Please try again.');
+            }
         }
     }
 
