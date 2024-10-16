@@ -10,6 +10,8 @@ import Link from 'next/link';
 import { BackgroundGradient } from '@/app/components/ui/background-gradient';
 import { Input } from '@/app/components/ui/input';
 import toast from 'react-hot-toast';
+import { loadStripe } from '@stripe/stripe-js';
+
 
 interface Product {
     _id: string,
@@ -29,6 +31,7 @@ function CartPage() {
     const { data: session, status } = useSession()
     const { cart, clearCart, removeFromCart } = useCart()
     const [shippingAddress, setShippingAddress] = useState('');
+    const [paymentMethod, setPaymentMethod] = useState('cash');
     const [orderSuccess, setOrderSuccess] = useState(false);
     const [product, setProduct] = useState([])
     const router = useRouter()
@@ -62,32 +65,62 @@ function CartPage() {
         e.preventDefault()
         if (!session || !session.user) return;
 
-        try {
-            if (shippingAddress === '') {
-                toast.error('Please enter Shipping Address')
-            }
-            const response = await axios.post('/api/product/order', {
-                customer: session && session.user._id,  // Ensure session.user._id exists
-                products: cart,
-                totalAmount: withDelivery,
-                currency: 'USD',
-                shippingAddress
-            });
-            if (response.data.success) {
-                setOrderSuccess(true);
-                clearCart();  // Clear the cart after successful order
-                router.push('/products/orderconfirm')
+        if (shippingAddress === '') {
+            toast.error('Please enter Shipping Address')
+            return
+        }
+        if (paymentMethod === 'cash') {
+            try {
+                const response = await axios.post('/api/product/order', {
+                    customer: session && session.user._id,  // Ensure session.user._id exists
+                    products: cart,
+                    totalAmount: withDelivery,
+                    currency: 'USD',
+                    shippingAddress
+                });
+                if (response.data.success) {
+                    setOrderSuccess(true);
+                    clearCart();  // Clear the cart after successful order
+                    router.push('/products/orderconfirm')
 
-            } else {
+                } else {
+                    toast.error('Failed to place order. Please try again.');
+                }
+
+
+
+
+            } catch (error) {
+                console.error('Error placing order:', error);
                 toast.error('Failed to place order. Please try again.');
             }
+        }
+        else if (paymentMethod === 'online') {
+            toast.success('Stripe payment will be implemented here.');
 
+            try {
+                const response = await axios.post('/api/stripe/create-checkout-session', {
+                    items: cart,
+                    shippingAddress
+                })
 
+                const stripe = await loadStripe(process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY!)
 
+                if (stripe) {
+                    const result = await stripe.redirectToCheckout({
+                        sessionId: response.data.sessionId
+                    })
 
-        } catch (error) {
-            console.error('Error placing order:', error);
-            toast.error('Failed to place order. Please try again.');
+                    if (result.error) {
+                        toast.error(result.error.message!)
+                    }
+                } else {
+                    toast.error('Stripe not found')
+                }
+            } catch (error) {
+                console.error('Error creating Stripe session:', error);
+                toast.error('Failed to process payment. Please try again.');
+            }
         }
     }
 
@@ -261,11 +294,39 @@ function CartPage() {
                                             </dl>
                                         </div>
 
+                                        <div className="space-y-4 mt-4">
+                                            <p className="text-base font-semibold text-gray-900 dark:text-white">Payment Method</p>
+                                            <div className="flex items-center space-x-4">
+                                                <label className="inline-flex items-center">
+                                                    <input
+                                                        type="radio"
+                                                        className="form-radio"
+                                                        name="paymentMethod"
+                                                        value="cash"
+                                                        checked={paymentMethod === 'cash'}
+                                                        onChange={() => setPaymentMethod('cash')}
+                                                    />
+                                                    <span className="ml-2 text-gray-700 dark:text-gray-300 text-sm">Cash on Delivery</span>
+                                                </label>
+                                                <label className="inline-flex items-center">
+                                                    <input
+                                                        type="radio"
+                                                        className="form-radio"
+                                                        name="paymentMethod"
+                                                        value="online"
+                                                        checked={paymentMethod === 'online'}
+                                                        onChange={() => setPaymentMethod('online')}
+                                                    />
+                                                    <span className="ml-2 text-sm text-gray-700 dark:text-gray-300">Online Payment</span>
+                                                </label>
+                                            </div>
+                                        </div>
+
                                         <button
                                             disabled={cart.length === 0}
                                             type='submit'
                                             className={`inline-flex h-12 w-full animate-shimmer items-center justify-center rounded-md border border-slate-800 ${orderSuccess ? 'bg-green-600 text-white/90 border-none focus:ring-transparent focus:ring-offset-transparent' : 'bg-[linear-gradient(110deg,#000103,45%,#1e2631,55%,#000103)] bg-[length:200%_100%]'} px-6 font-medium text-slate-400 transition-colors focus:outline-none focus:ring-2 focus:ring-slate-400 focus:ring-offset-2 focus:ring-offset-slate-50`}>
-                                            {orderSuccess ? 'Order Placed' : 'Place Order'}
+                                            {orderSuccess ? 'Order Placed' : paymentMethod === 'cash' ? 'Place Order' : 'Proceed to Payment'}
                                         </button>
                                         <div className="flex items-center justify-center gap-2">
                                             <span className="text-sm font-normal text-gray-500 dark:text-gray-400"> or </span>

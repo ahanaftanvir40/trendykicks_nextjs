@@ -3,7 +3,7 @@ import React, { useState } from "react";
 import { HoveredLink, Menu, MenuItem, ProductItem } from "./ui/navbar-menu";
 import { cn } from "../utils/cn";
 import Link from "next/link";
-import { useSession } from "next-auth/react";
+import { useSession, signOut } from "next-auth/react";
 import Cart from "./Cart";
 import SignOut from "./SignOutComponent";
 
@@ -53,6 +53,7 @@ function NavBar({ className }: { className?: string }) {
                             <HoveredLink href='/adminpanel'>Manage Products</HoveredLink>
                             <HoveredLink href='/adminpanel/orders'>Orders</HoveredLink>
                             <HoveredLink href='/products'>Users</HoveredLink>
+
                         </div>
                     </MenuItem>
                 )}
